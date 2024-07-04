@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input, button {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#cases-list div {
+    margin-top: 10px;
+}
+
+#cases-list h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#cases-list a {
+    color: blue;
+    text-decoration: underline;
+}

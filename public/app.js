@@ -16,39 +16,55 @@ const firebaseConfig = {
 };
 
 // Inicializar Firebase
+console.log('Inicializando Firebase');
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
+console.log('Firebase inicializado');
 
 // Manejar el envío del formulario
 document.getElementById('case-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log('Formulario enviado');
 
     const caseName = document.getElementById('case-name').value;
     const caseAttachment = document.getElementById('case-attachment').files[0];
 
     if (caseName && caseAttachment) {
-        const storageRef = ref(storage, `attachments/${caseAttachment.name}`);
-        await uploadBytes(storageRef, caseAttachment);
-        const attachmentUrl = await getDownloadURL(storageRef);
+        console.log('Nombre del caso:', caseName);
+        console.log('Archivo adjunto:', caseAttachment.name);
 
         try {
+            const storageRef = ref(storage, `attachments/${caseAttachment.name}`);
+            await uploadBytes(storageRef, caseAttachment);
+            console.log('Archivo subido a Storage');
+
+            const attachmentUrl = await getDownloadURL(storageRef);
+            console.log('URL del archivo:', attachmentUrl);
+
             await addDoc(collection(db, 'cases'), {
                 name: caseName,
                 attachmentUrl: attachmentUrl,
                 createdAt: serverTimestamp()
             });
+            console.log('Documento agregado a Firestore');
+
             document.getElementById('case-form').reset();
+            alert('Caso guardado exitosamente');
             loadCases();
         } catch (error) {
             console.error('Error adding document: ', error);
+            alert('Error al guardar el caso: ' + error.message);
         }
+    } else {
+        alert('Por favor, completa todos los campos y sino largate');
     }
 });
 
 // Cargar los casos
 const loadCases = async () => {
+    console.log('Cargando casos');
     const q = query(collection(db, 'cases'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
     const casesList = document.getElementById('cases-list');
@@ -62,6 +78,7 @@ const loadCases = async () => {
         `;
         casesList.appendChild(caseElement);
     });
+    console.log('Casos cargados');
 };
 
 loadCases();
