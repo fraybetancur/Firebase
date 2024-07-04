@@ -54,11 +54,11 @@ document.getElementById('case-form').addEventListener('submit', async (e) => {
             alert('Caso guardado exitosamente');
             loadCases();
         } catch (error) {
-            console.error('Error adding document: ', error);
+            console.error('Error al agregar documento: ', error);
             alert('Error al guardar el caso: ' + error.message);
         }
     } else {
-        alert('Por favor, completa todos los campos oyo');
+        alert('Por favor, completa todos los campos');
     }
 });
 
