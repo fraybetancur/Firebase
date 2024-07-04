@@ -1,22 +1,24 @@
 // Importar las funciones que necesitas de los SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
 import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js";
 
 // Tu configuración de Firebase
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
+    apiKey: "AIzaSyDUaitzhPjCFymRKZdG6cCf6kcCIYAMviw",
+    authDomain: "datmetrics-673c2.firebaseapp.com",
+    projectId: "datmetrics-673c2",
+    storageBucket: "datmetrics-673c2.appspot.com",
+    messagingSenderId: "748892277936",
+    appId: "1:748892277936:web:171d0bfe196f9275493f75",
+    measurementId: "G-C1Q573J9T0"
 };
 
 // Inicializar Firebase
 console.log('Inicializando Firebase');
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 console.log('Firebase inicializado');
@@ -56,7 +58,7 @@ document.getElementById('case-form').addEventListener('submit', async (e) => {
             alert('Error al guardar el caso: ' + error.message);
         }
     } else {
-        alert('Por favor, completa todos los campos.');
+        alert('Por favor, completa todos los campos');
     }
 });
 
@@ -72,7 +74,7 @@ const loadCases = async () => {
         const caseElement = document.createElement('div');
         caseElement.innerHTML = `
             <h2>${caseData.name}</h2>
-            <img src="${caseData.attachmentUrl}" alt="Adjunto" style="max-width: 200px;">
+            <img src="${caseData.attachmentUrl}" alt="${caseData.name}" style="max-width: 200px; max-height: 200px;">
         `;
         casesList.appendChild(caseElement);
     });
