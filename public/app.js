@@ -58,7 +58,7 @@ document.getElementById('case-form').addEventListener('submit', async (e) => {
             alert('Error al guardar el caso: ' + error.message);
         }
     } else {
-        alert('Por favor, completa todos los campos y sino largate');
+        alert('Por favor, completa todos los campos oyo');
     }
 });
 
